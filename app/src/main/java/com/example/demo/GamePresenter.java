@@ -355,8 +355,9 @@ public class GamePresenter {
             if (itemBeen[ram].getNumber() == 0)
                 break;
         }
-        itemBeen[ram].setNumber(2);
-        viewitems[ram].setNumber(2);
+        int number = Math.random() > 0.75 ? 4 : 2;
+        itemBeen[ram].setNumber(number);
+        viewitems[ram].setNumber(number);
         Animation animation = new ScaleAnimation(0f, 1f, 0f, 1f
                 , Animation.RELATIVE_TO_SELF, 0.5f
                 , Animation.RELATIVE_TO_SELF, 0.5f);
