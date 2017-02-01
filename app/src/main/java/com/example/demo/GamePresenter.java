@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
@@ -27,9 +28,9 @@ public class GamePresenter {
     private static final int OVER = -1;  //表示动画结束
     private TranslateAnimation anim;
     private GameViewitem[] viewitems;
-    private Context context;
-    private TextView scoreText;
-    private ItemBean[] itemBeen = new ItemBean[16];
+    private static Context context;
+    private static TextView scoreText;
+    private static ItemBean[] itemBeen = new ItemBean[16];
     private List<GameViewitem> items = new ArrayList<>();
 
     private void initialItem() {
@@ -46,8 +47,8 @@ public class GamePresenter {
 
     GamePresenter(GameView gameView, TextView scoreText, Context context) {
         this.gameView = gameView;
-        this.scoreText = scoreText;
-        this.context = context;
+        GamePresenter.scoreText = scoreText;
+        GamePresenter.context = context;
         getDirection();
     }
 
@@ -408,6 +409,11 @@ public class GamePresenter {
                 scoreText.setText(String.valueOf(newScore));
             }
         });
+    }
+
+    protected static void saveItems() {
+        int score = Integer.parseInt(scoreText.getText().toString());
+        SharedPreference.setSharedPreference(context, itemBeen, score);
     }
 
 }
