@@ -412,9 +412,10 @@ public class GamePresenter {
         });
     }
 
-    protected static void saveItems() {
+    public void saveItems() {
         int score = Integer.parseInt(scoreText.getText().toString());
-        SharedPreference.setSharedPreference(context, itemBeen, score);
+        if (items.size() != 0)
+            SharedPreference.setSharedPreference(context, itemBeen, score);
     }
 
 }
